@@ -1,3 +1,8 @@
+'''
+Author: Flow
+Date: 2025-02-20 16:52:24
+LastEditTime: 2025-03-01 10:54:23
+'''
 from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import division
@@ -42,8 +47,8 @@ if __name__ == '__main__':
     fout_failed, failed_writer = get_writer('failed_template.csv', ['id', 'class', 'rxn_smiles', 'err_msg'])
 
     for result in tqdm(pool.imap_unordered(get_tpl, tasks), total=len(tasks)):
-        idx, template = result
-        row_idx, rxn_type, rxn_smiles = rows[idx]
+        idx, template = result  #获取id以及模板
+        row_idx, rxn_type, rxn_smiles = rows[idx]   #获取训练数据的id，类别，反应式
 
         if 'reaction_smarts' in template:
             writer.writerow([row_idx, rxn_type, rxn_smiles, template['reaction_smarts']])            
