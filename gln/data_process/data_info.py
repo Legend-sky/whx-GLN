@@ -124,7 +124,8 @@ class DataInfo(object):
     @classmethod
     def init(cls, dropbox, args):
         cls.args = args
-        cls.args.dropbox = dropbox
+        cls.args.dropbox = dropbox  #../../../dropbox
+        # file_root = '../../../dropbox/cooked_schneider50k/tpl-default'
         file_root = os.path.join(dropbox, 'cooked_' + args.data_name, 'tpl-%s' % args.tpl_name)
         print('loading data info from', file_root)
         
