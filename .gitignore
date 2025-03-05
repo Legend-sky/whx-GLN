@@ -4,13 +4,15 @@ logwrite
 .module_log
 build/
 *.tar.gz
+*.zip
+.idea/
 .vscode/
 __pycache__/
 dropbox
 dropbox/
 *.so
 *.pkl
-
+*.egg
 *.ipynb_checkpoints/
 
 *-result/

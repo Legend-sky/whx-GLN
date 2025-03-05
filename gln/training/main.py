@@ -27,6 +27,7 @@ import torch.optim as optim
 from gln.common.reactor import Reactor
 from gln.common.evaluate import get_score, canonicalize
 from rdkit import rdBase
+
 rdBase.DisableLog('rdApp.error')
 rdBase.DisableLog('rdApp.warning')
 
@@ -43,7 +44,7 @@ def main_train():
     for epoch in range(cmd_args.num_epochs):
 
         pbar = tqdm(range(1, 1 + cmd_args.iters_per_val))
-        
+
         for it in pbar:
             samples = [next(train_sample_gen) for _ in range(cmd_args.batch_size)]
             optimizer.zero_grad()
@@ -59,7 +60,7 @@ def main_train():
         if epoch % cmd_args.epochs2save == 0:
             out_folder = os.path.join(cmd_args.save_dir, 'model-%d.dump' % epoch)
             if not os.path.isdir(out_folder):
-                os.makedirs(out_folder)            
+                os.makedirs(out_folder)
             torch.save(graph_path.state_dict(), os.path.join(out_folder, 'model.dump'))
             with open(os.path.join(out_folder, 'args.pkl'), 'wb') as f:
                 cp.dump(cmd_args, f, cp.HIGHEST_PROTOCOL)
