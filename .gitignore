@@ -17,3 +17,5 @@ dropbox/
 
 *-result/
 crossEncoderscore/
+results/
+*.out

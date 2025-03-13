@@ -25,7 +25,7 @@ cmd_opt.add_argument('-num_cores', default=1, type=int, help='# cpu cores')
 cmd_opt.add_argument('-num_parts', default=1, type=int, help='num of parts to split')
 
 cmd_opt.add_argument('-part_id', default=0, type=int, help='part id')
-cmd_opt.add_argument('-epochs2save', default=1, type=int, help='epochs to save')
+cmd_opt.add_argument('-epochs2save', default=10, type=int, help='epochs to save')
 cmd_opt.add_argument('-max_neg_reacts', default=0, type=int, help='max neg')
 cmd_opt.add_argument('-part_num', default=0, type=int, help='part num')
 cmd_opt.add_argument('-eval_func', default='acc', help='acc/mix_f1')

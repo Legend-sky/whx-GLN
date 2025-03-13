@@ -18,8 +18,10 @@ gen=weighted
 gnn_out=last
 neg_sample=all
 att_type=bilinear
+num_epochs=1000
+epochs2save=100
 
-save_dir=$HOME/scratch/results/gln/$data_name/tpl-$tpl_name/${gm}-${act}-lv-${lv}-l-${msg_dim}-e-${embed_dim}-gagg-${graph_agg}-retro-${retro}-gen-${gen}-ng-${neg_size}-bn-${bn}-te-${tpl_enc}-se-${subg_enc}-go-${gnn_out}-ns-${neg_sample}-att-${att_type}
+save_dir=../../../results/$data_name/
 
 if [ ! -e $save_dir ];
 then
@@ -28,6 +30,9 @@ fi
 
 export CUDA_VISIBLE_DEVICES=0
 export OMP_NUM_THREADS=2
+
+current_dir=$(pwd)
+echo $current_dir
 
 python ../main.py \
     -gm $gm \
@@ -57,4 +62,6 @@ python ../main.py \
     -topk 50 \
     -beam_size 50 \
     -num_parts 1 \
+    -num_epochs $num_epochs \
+    -epochs2save $epochs2save
 

@@ -19,7 +19,7 @@ from gln.mods.mol_gnn.mol_utils import SmilesMols, SmartsMols
 def load_bin_feats(dropbox, args):
     print('loading smiles feature dump')
     file_root = os.path.join(dropbox, 'cooked_' + args.data_name, 'tpl-%s' % args.tpl_name)
-    SmartsMols.set_fp_degree(args.fp_degree)
+    SmartsMols.set_fp_degree(args.fp_degree)    #2
     load_feats = args.subg_enc != 'ecfp' or args.tpl_enc != 'onehot'
     load_fp = args.subg_enc == 'ecfp'
     SmartsMols.load_dump(os.path.join(file_root, 'graph_smarts'), load_feats=load_feats, load_fp=load_fp)
