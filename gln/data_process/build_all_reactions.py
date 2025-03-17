@@ -37,8 +37,8 @@ def find_tpls(cur_task):
     neg_reactants = set()
     pos_tpl_idx = {}
     tot_tpls = 0
-    for center_idx in prod_center_cand_idx:
-        c = DataInfo.prod_cano_smarts[center_idx]
+    for center_idx in prod_center_cand_idx: # 对每个product遍历每个上一步找到的所有对应反应中心的模板
+        c = DataInfo.prod_cano_smarts[center_idx]   # 产物的反应中心
         assert c in DataInfo.unique_tpl_of_prod_center
 
         tpl_indices = DataInfo.unique_tpl_of_prod_center[c][rxn_type]
@@ -50,7 +50,7 @@ def find_tpls(cur_task):
             if pred_mols is None or len(pred_mols) == 0:
                 continue            
             for pred in pred_mols:
-                if pred != reactants:
+                if pred != reactants:   # 预测结果与真实值不相符，放入neg中
                     neg_reactants.add(pred)
                 else:
                     pos_tpl_idx[tpl_idx] = (len(tpl_indices), len(pred_mols))
@@ -111,8 +111,8 @@ if __name__ == '__main__':
             for pred in neg_keys:
                 writer_neg.writerow([idx, pred])
             for key in pos_tpl_idx:
-                nt, np = pos_tpl_idx[key]
-                writer_pos.writerow([idx, key, nt, np])
+                nt, _np = pos_tpl_idx[key]
+                writer_pos.writerow([idx, key, nt, _np])
             f_pos.flush()
             f_neg.flush()
         f_pos.close()

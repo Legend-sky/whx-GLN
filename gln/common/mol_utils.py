@@ -20,7 +20,7 @@ def cano_smiles(smiles):
         return None, smiles
 
 
-def cano_smarts(smarts):
+def cano_smarts(smarts):    #生成规范化SMARTS
     tmp = Chem.MolFromSmarts(smarts)
     if tmp is None:        
         return None, smarts

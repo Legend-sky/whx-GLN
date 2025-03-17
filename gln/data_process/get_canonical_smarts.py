@@ -25,12 +25,12 @@ def process_centers():
         if smarts_has_useless_parentheses(sm_prod):
             sm_prod = sm_prod[1:-1]
         
-        smarts_cano_map[sm_prod] = cano_smarts(sm_prod)[1]
-        prod_cano_smarts.add(smarts_cano_map[sm_prod])
+        smarts_cano_map[sm_prod] = cano_smarts(sm_prod)[1]  #{原始SMARTS：规范化SMARTS}
+        prod_cano_smarts.add(smarts_cano_map[sm_prod])      #所有product反应中心规范化SMARTS的集合
         
         for r_smarts in sm_react.split('.'):            
             smarts_cano_map[r_smarts] = cano_smarts(r_smarts)[1]
-            react_cano_smarts.add(smarts_cano_map[r_smarts])
+            react_cano_smarts.add(smarts_cano_map[r_smarts])    #所有reactant反应中心规范化SMARTS的集合
         pbar.set_description('# prod centers: %d, # react centers: %d' % (len(prod_cano_smarts), len(react_cano_smarts)))
     print('# prod centers: %d, # react centers: %d' % (len(prod_cano_smarts), len(react_cano_smarts)))
 

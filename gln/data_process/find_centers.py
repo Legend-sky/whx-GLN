@@ -15,7 +15,7 @@ from gln.common.mol_utils import cano_smarts, cano_smiles, smarts_has_useless_pa
 import multiprocessing
 
 
-def find_edges(task):
+def find_edges(task):   #找出每条rxn反应的product匹配的所有反应中心的位置idx
     idx, rxn_type, smiles = task
     smiles = smiles_cano_map[smiles]
 
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     if cmd_args.num_parts <= 0:
         num_parts = cmd_args.num_cores
     else:
-        num_parts = cmd_args.num_parts
+        num_parts = cmd_args.num_parts  #1
 
     pool = multiprocessing.Pool(cmd_args.num_cores)
 

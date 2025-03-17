@@ -31,7 +31,9 @@ def get_tpl(task):
     return idx, template
 
 if __name__ == '__main__':
-    fname = os.path.join(cmd_args.dropbox, cmd_args.data_name, 'raw_train.csv')
+    # 获取当前脚本的绝对路径
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    fname = os.path.join(script_dir,cmd_args.dropbox, cmd_args.data_name, 'raw_train.csv')
     with open(fname, 'r') as f:
         reader = csv.reader(f)
         header = next(reader)

@@ -19,17 +19,17 @@ from gln.common.reactor import Reactor
 class DataSample(object):
     def __init__(self, prod, center, template, label=None, neg_centers=None, neg_tpls=None,
                  reaction=None, neg_reactions=None):
-        self.prod = prod
-        self.center = center
-        self.template = template
-        self.label = label
-        self.neg_centers = neg_centers
-        self.neg_tpls = neg_tpls
-        self.reaction = reaction
-        self.neg_reactions = neg_reactions
+        self.prod = prod  # 产物的规范SMILES表示
+        self.center = center  # 反应中心的规范SMARTS表示
+        self.template = template  # 反应模板
+        self.label = label  # 标签（可选）
+        self.neg_centers = neg_centers  # 负样本的反应中心
+        self.neg_tpls = neg_tpls  # 负样本的反应模板
+        self.reaction = reaction  # 正样本的反应（可选）
+        self.neg_reactions = neg_reactions  # 负样本的反应（可选）
 
 
-def _rand_sample_except(candidates, exclude, k=None):
+def _rand_sample_except(candidates, exclude, k=None):   #从候选列表candidates中随机选择k个样本，排除指定的exclude项
     assert len(candidates)
     if k is None:
         if len(candidates) == 1:
@@ -64,7 +64,7 @@ def worker_softmax(worker_id, seed, args):
     part_id = 0
     train_reactions = load_train_reactions(args)
     while True:
-        if num_epochs % args.epochs_per_part == 0:
+        if num_epochs % args.epochs_per_part == 0:  # args.epochs_per_part = 1，每隔一定轮数加载数据分区
             DataInfo.load_cooked_part('train', part_id)
             tot_num = len(train_reactions)
             part_size = tot_num // args.num_parts + 1
@@ -87,14 +87,14 @@ def worker_softmax(worker_id, seed, args):
             sm_prod, _, _ = rxn_template.split('>')
             cano_sm_prod = DataInfo.smarts_cano_map[sm_prod]
 
-            # negative samples of prod centers
+            # 生成负样本的反应中心
             assert (rxn_type, cano_prod) in DataInfo.prod_center_maps
             prod_center_cand_idx = DataInfo.prod_center_maps[(rxn_type, cano_prod)]
             
             neg_center_idxes = _rand_sample_except(prod_center_cand_idx, DataInfo.prod_smarts_idx[cano_sm_prod], args.neg_num)
             neg_centers = [DataInfo.prod_cano_smarts[c] for c in neg_center_idxes]
 
-            # negative samples of templates
+            # 生成负样本的模板
             assert cano_sm_prod in DataInfo.unique_tpl_of_prod_center
             assert rxn_type in DataInfo.unique_tpl_of_prod_center[cano_sm_prod]
             neg_tpl_idxes = _rand_sample_except(DataInfo.unique_tpl_of_prod_center[cano_sm_prod][rxn_type], pos_tpl_idx, args.neg_num)

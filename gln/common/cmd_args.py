@@ -8,7 +8,7 @@ import pickle as cp
 
 cmd_opt = argparse.ArgumentParser(description='Argparser for retrosyn_graph')
 cmd_opt.add_argument('-save_dir', default='.', help='result output root')
-cmd_opt.add_argument('-dropbox', default=None, help='dropbox folder')
+cmd_opt.add_argument('-dropbox', default="../../data", help='dropbox folder')
 cmd_opt.add_argument('-cooked_root', default=None, help='cooked data root folder')
 cmd_opt.add_argument('-init_model_dump', default=None, help='model dump')
 cmd_opt.add_argument('-data_name', default=None, help='dataset name')
