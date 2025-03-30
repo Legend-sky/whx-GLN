@@ -10,7 +10,6 @@ from collections import defaultdict
 import numpy as np
 
 from gln.common.mol_utils import cano_smarts, cano_smiles
-from gln.common.cmd_args import cmd_args
 from gln.common.evaluate import canonicalize
 from gln.common.mol_utils import smarts_has_useless_parentheses
 from gln.mods.mol_gnn.mol_utils import SmilesMols, SmartsMols
@@ -71,7 +70,7 @@ class DataInfo(object):
         if load_graphs and args.retro_during_train:
             if cls.cur_part is not None:
                 SmilesMols.remove_dump(os.path.join(file_root, 'neg_graphs-part-%d' % cls.cur_part))
-            SmilesMols.load_dump(os.path.join(file_root, 'neg_graphs-part-%d' % part), additive=True, load_feats=load_feats, load_fp=load_fp)
+            SmilesMols.load_dump(os.path.join(file_root, 'LocalRetro_graphs_neg.csv'), additive=True, load_feats=load_feats, load_fp=load_fp)
 
         if args.gen_method != 'none':  # load pos-tpl map
             print('loading positive tpls')
@@ -98,7 +97,8 @@ class DataInfo(object):
             cls.neg_reacts_ids = {}
             cls.neg_reacts_list = []
             cls.neg_reactions_all = defaultdict(set)
-            fname = 'neg_reacts.csv' if part is None else 'neg_reacts-part-%d.csv' % part
+            # fname = 'neg_reacts.csv' if part is None else 'neg_reacts-part-%d.csv' % part
+            fname = 'LocalRetro_train_neg.csv'
             with open(os.path.join(file_root, fname), 'r') as f:
                 reader = csv.reader(f)
                 header = next(reader)

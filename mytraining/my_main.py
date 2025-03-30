@@ -10,11 +10,12 @@ from rdkit import Chem
 import random
 import pickle as cp
 import csv
-from gln.common.cmd_args import cmd_args
 from gln.common.consts import t_float, DEVICE
 from gln.data_process.data_info import load_bin_feats, DataInfo
-from gln.graph_logic.logic_net import GraphPath
-from gln.training.data_gen import data_gen, worker_softmax
+
+from mytraining.my_cmd_args import cmd_args
+from mytraining.my_logic_net import GraphPath
+from mytraining.my_data_gen import data_gen, worker_softmax
 from tqdm import tqdm
 import torch
 import torch.optim as optim

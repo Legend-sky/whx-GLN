@@ -13,7 +13,7 @@ class _mg_lib(object):
         dir_path = os.path.dirname(os.path.realpath(__file__))
         self.lib = ctypes.CDLL('%s/build/dll/libmolgnn.so' % dir_path)
 
-        atom_file = '%s/default_atoms.txt' % dir_path
+        atom_file = '%s/atom_list.txt' % dir_path
         for i in range(len(sys_args)):
             if sys_args[i] == '-f_atoms':
                 atom_file = sys.argv[i + 1]

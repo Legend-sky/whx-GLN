@@ -5,7 +5,7 @@ from __future__ import division
 
 import rdkit
 from rdkit import Chem
-from gln.common.cmd_args import rdchiralReaction, rdchiralReactants, rdchiralRun
+from gln.mods.rdchiral.main import rdchiralReaction, rdchiralReactants, rdchiralRun
 
 class _Reactor(object):
 

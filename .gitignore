@@ -19,3 +19,5 @@ dropbox/
 crossEncoderscore/
 results/
 *.out
+mytraining/mytraining/
+data/
